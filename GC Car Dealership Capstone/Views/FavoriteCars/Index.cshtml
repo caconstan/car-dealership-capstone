@@ -1,0 +1,51 @@
+﻿@model IEnumerable<GC_Car_Dealership_Capstone.Models.FavoriteCars>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Your Favorite Cars</h4>
+
+<p>
+    Go to the Home Page To Add More
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Car ID</th>
+            <th>User ID</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Year</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Carid
+            </td>
+            <td>
+                @item.Userid
+            </td>
+            <td>
+                @item.Make
+            </td>
+            <td>
+                @item.Model
+            </td>
+            <td>
+                @item.Color
+            </td>
+            <td>
+                @item.Year
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GC_Car_Dealership_Capstone.Models.Cars>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form method="POST">
+    Make: <input type="text" name="make" /> Model: <input type="text" name="model" /><br />
+    Year: <input type="text" size="4" min="2000" max="2020" name="year" /> Color: <input type="text" name="color" /><br />
+    <input type="submit" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Save To Favorites</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Make</td>
+                <td>@item.Model</td>
+                <td>@item.Year</td>
+                <td>@item.Color</td>
+                <td>
+                    @if (null == @User.Identity.Name)
+                    {
+                        <p>Login To Save Favorites</p>
+                    } else
+                    {
+                        <form action="/FavoriteCars/AddToFavorites" method="POST">
+                            <input type="hidden" name="CarID" value="@item.Id" />
+                            <input type="submit" value="Save To Favorites" />
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
